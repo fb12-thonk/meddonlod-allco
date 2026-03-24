@@ -1,0 +1,369 @@
+          @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Jost", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: <weight>;
+            font-style: normal;
+            }
+        body {
+            background-color: #f8f9fa !important;
+            color: #333;
+            /* Fixed header padding */
+            padding-top: 70px; 
+        }
+
+        /* --- 3D BOX (NEO-BRUTALISM) --- */
+        .box-3d {
+            background-color: #ffffff;
+            border: 3px solid #111;
+            border-radius: 12px;
+            /*Bayangan solid menciptakan ilusi 3D dilihat dari samping bawah */
+            box-shadow: 8px 8px 0px #111;
+            padding: 30px;
+            margin-bottom: 40px;
+            transition: all 0.2s ease;
+        }
+
+        .box-3d:hover {
+            box-shadow: 12px 12px 0px #111;
+            transform: translate(-4px, -4px);
+        }
+
+        /* --- FIXED HEADER --- */
+        .navbar-custom {
+            background-color: #ffffff;
+            border-bottom: 3px solid #111;
+            border-radius: 0;
+            margin-bottom: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+        }
+
+        .navbar-brand img {
+            height: 35px; /* Kecilkan logo */
+            width: auto;
+            margin-right: 12px;
+            display: inline-block;
+        }
+
+        .navbar-brand span {
+            font-weight: 800;
+            font-size: 22px;
+            color: #111;
+            letter-spacing: -0.5px;
+        }
+
+        /* --- SOSMED BUTTONS --- */
+        .btn-3d-sosmed {
+            border: 2px solid #111;
+            box-shadow: 4px 4px 0px #111;
+            font-weight: bold;
+            transition: all 0.1s ease;
+            margin-bottom: 12px;
+            margin-right: 5px;
+            background-color: #fff;
+            color: #111;
+            border-radius: 6px;
+        }
+
+        .btn-3d-sosmed:active {
+            box-shadow: 0px 0px 0px #111;
+            transform: translate(4px, 4px);
+        }
+
+        /* Brand Colors */
+        .btn-3d-sosmed.active-tiktok { background-color: #000; color: #fff; }
+        .btn-3d-sosmed.btn-fb { background-color: #1877F2; color: #fff; }
+        .btn-3d-sosmed.btn-ig { background-color: #E1306C; color: #fff; }
+        .btn-3d-sosmed.btn-pin { background-color: #E60023; color: #fff; }
+        .btn-3d-sosmed.btn-yt { background-color: #FF0000; color: #fff; }
+
+        /* Icon SVG */
+        .icon-svg {
+            width: 18px;
+            height: 18px;
+            vertical-align: middle;
+            fill: currentColor;
+            margin-right: 5px;
+        }
+
+        /* --- INPUT GROUP 3D --- */
+        .input-group-custom {
+            margin-top: 20px;
+        }
+        
+        .form-control-3d {
+            border: 3px solid #111;
+            box-shadow: inset 2px 2px 5px rgba(0,0,0,0.05);
+            height: 50px;
+            font-size: 16px;
+            border-radius: 8px 0 0 8px !important;
+        }
+
+        .form-control-3d:focus {
+            box-shadow: none;
+            border-color: #111;
+            background-color: #fafffa;
+        }
+
+        .btn-action-3d {
+            height: 50px;
+            border: 3px solid #111;
+            border-left: none;
+            background-color: #eee;
+            font-weight: bold;
+            color: #111;
+            transition: background 0.2s;
+        }
+
+        .btn-paste {
+            padding: 0 20px;
+        }
+        
+        .btn-paste:hover { background-color: #ddd; }
+
+        .btn-download {
+            background-color: #00C853; /* Hijau cerah */
+            color: #fff;
+            border-radius: 0 8px 8px 0 !important;
+            padding: 0 25px;
+        }
+
+        .btn-download:hover { background-color: #00E676; color: #111; }
+
+        /* --- SIMULATION AREA --- */
+        .media-preview-container {
+            width: 100%;
+            height: auto;
+            max-height: 250px; /* Batas ketinggian media */
+            background-color: #e9ecef;
+            border: 3px solid #111;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .media-preview-container img {
+            max-width: 100%;
+            max-height: 250px;
+            object-fit: contain; /* Menjaga proporsi tanpa terpotong */
+        }
+
+        /* Tombol download spesifik di area simulasi */
+        .btn-sim-dl {
+            width: 100%;
+            border: 3px solid #111;
+            font-weight: bold;
+            text-align: left;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            transition: transform 0.1s;
+        }
+        
+        .btn-sim-dl:active { transform: translateY(2px); }
+        .btn-sim-video { background-color: #00C853; color: #fff; }
+        .btn-sim-image { background-color: #f8f9fa; color: #111; }
+
+        /* --- FEATURES SECTIONS --- */
+        .section-title {
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+        }
+        
+        .feature-box {
+            padding: 25px 20px;
+            text-align: center;
+        }
+        
+        .feature-icon-svg {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 20px;
+            fill: #111;
+        }
+
+        /* --- NO-BORDER ARTICLE AREA --- */
+        .plain-article {
+            background-color: transparent;
+            padding: 20px 0;
+            margin-bottom: 40px;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        
+        .plain-article h3 { font-weight: 800; margin-bottom: 20px; }
+        .plain-article p { margin-bottom: 15px; text-align: justify; }
+
+        /* --- FAQ AREA --- */
+        .panel-group-custom .panel {
+            border: 3px solid #111;
+            border-radius: 12px !important;
+            box-shadow: 6px 6px 0px #111;
+            margin-bottom: 15px !important;
+            overflow: hidden;
+        }
+        
+        .panel-group-custom .panel-heading {
+            background-color: #fff !important;
+            border-bottom: none !important;
+            padding: 15px 20px;
+        }
+
+        .panel-group-custom .panel-title > a {
+            font-weight: bold;
+            color: #111;
+            display: block;
+            text-decoration: none;
+            position: relative;
+        }
+        
+        .panel-group-custom .panel-title > a:after {
+            content: "\e114"; /* Chevron down */
+            font-family: 'Glyphicons Halflings';
+            position: absolute;
+            right: 0;
+            transition: transform 0.3s;
+        }
+        
+        .panel-group-custom .panel-title > a[aria-expanded="true"]:after {
+            transform: rotate(180deg);
+        }
+
+        /* --- FOOTER AREA --- */
+        footer {
+            border-top: 3px solid #111;
+            background-color: #fff;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .footer-logo img {
+            height: 35px;
+            width: auto;
+            margin-right: 12px;
+        }
+        
+        .footer-links { margin-bottom: 20px; }
+        .footer-links a { color: #555; text-decoration: none; margin-right: 20px; display: inline-block; margin-bottom: 10px;}
+        .footer-links a:hover { color: #111; text-decoration: underline; }
+
+        /* --- CUSTOM NOTIFICATION (TOAST) --- */
+        #custom-toast {
+            visibility: hidden;
+            min-width: 280px;
+            background-color: #fff;
+            color: #111;
+            text-align: center;
+            border-radius: 8px;
+            padding: 16px;
+            position: fixed;
+            z-index: 9999;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            border: 3px solid #111;
+            box-shadow: 6px 6px 0px #111;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s, bottom 0.3s;
+        }
+
+        #custom-toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 50px;
+        }
+        
+        .toast-success { border-left: 8px solid #00C853 !important; }
+        .toast-error { border-left: 8px solid #FF0000 !important; }
+        
+       /* =========================================
+           TAMBAHAN CSS UNTUK PERBAIKAN RESPONSIVE
+           ========================================= */
+
+        /* 1. Mencegah Teks Meluber (Word-Wrap) di Semua Box */
+        .box-3d, .plain-article, .panel-body, h4 {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            max-width: 100%;
+        }
+
+        /* 2. Menyamakan Tinggi Box Features (Otomatis deteksi baris setelah judul) */
+        @media (min-width: 768px) {
+            h3.section-title + .row, 
+            h3.section-title + .row + .row {
+                display: flex;
+                flex-wrap: wrap;
+            }
+            
+            h3.section-title + .row > div[class*="col-"],
+            h3.section-title + .row + .row > div[class*="col-"] {
+                display: flex;
+            }
+            
+            .feature-box {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                height: calc(100% - 40px); /* Kurangi margin bawah */
+            }
+            
+            .feature-box p {
+                flex-grow: 1; /* Mendorong teks agar mengisi ruang kosong merata */
+            }
+        }
+
+        /* 3. Merapikan Area Input di Layar Ponsel (Numpuk ke Bawah) */
+        @media (max-width: 767px) {
+            .input-group-custom {
+                display: flex !important;
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .input-group-custom .form-control-3d {
+                width: 100% !important;
+                border-radius: 8px !important;
+                border-right: 3px solid #111 !important; /* Memulihkan garis kanan */
+            }
+
+            .input-group-custom .input-group-btn {
+                display: flex;
+                flex-direction: column; /* Tombol diatur atas-bawah */
+                width: 100% !important;
+                gap: 12px;
+                clear: both;
+            }
+
+            .input-group-custom .btn-action-3d {
+                width: 100%;
+                border-radius: 8px !important;
+                border-left: 3px solid #111 !important; /* Memulihkan garis kiri */
+            }
+        }
