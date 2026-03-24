@@ -1,0 +1,94 @@
+import { NextResponse } from 'next/server';
+
+export async function GET(request) {
+  const { searchParams } = new URL(request.url);
+  const url = searchParams.get('url');
+
+  if (!url) return NextResponse.json({ status: 'error', message: 'URL Kosong' });
+
+  try {
+    // Header dibikin semirip mungkin sama browser asli biar gak dikira bot
+    const headers = {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+      'Accept-Language': 'en-US,en;q=0.5',
+      'Referer': 'https://www.tiktok.com/',
+    };
+
+    // Tambahin cache: 'no-store' biar Next.js gak nyimpen request yang gagal
+    const response = await fetch(url, {
+      headers,
+      cache: 'no-store', 
+      redirect: 'follow'
+    });
+
+    if (!response.ok) {
+       throw new Error(`Gagal akses TikTok: HTTP ${response.status}`);
+    }
+
+    const html = await response.text();
+
+    let jsonText = "";
+    const regexes = [
+      /<script id="__UNIVERSAL_DATA_FOR_REHYDRATION__"[^>]*>([^<]+)<\/script>/,
+      /<script id="SIGI_STATE"[^>]*>([^<]+)<\/script>/,
+      /<script id="__NEXT_DATA__"[^>]*>([^<]+)<\/script>/
+    ];
+
+    for (let regex of regexes) {
+      const match = html.match(regex);
+      if (match && match[1]) {
+        jsonText = match[1];
+        break;
+      }
+    }
+
+    if (!jsonText) throw new Error("Kena blokir Captcha TikTok atau script gak ketemu.");
+
+    const data = JSON.parse(jsonText);
+    let itemStruct = null;
+
+    function findStruct(obj) {
+      if (!obj || typeof obj !== 'object') return null;
+      if (obj.video && obj.id && obj.author) return obj;
+      for (let key in obj) {
+        if (['music', 'stats', 'author'].includes(key)) continue;
+        const result = findStruct(obj[key]);
+        if (result) return result;
+      }
+      return null;
+    }
+
+    itemStruct = findStruct(data);
+    if (!itemStruct) throw new Error("Data video gak ketemu di dalam JSON.");
+
+    let candidates = [];
+    if (itemStruct.video?.playAddr?.UrlList) candidates.push(...itemStruct.video.playAddr.UrlList);
+    if (itemStruct.video?.bitrateInfo) {
+      itemStruct.video.bitrateInfo.forEach(br => {
+        if (br.PlayAddr?.UrlList) candidates.push(...br.PlayAddr.UrlList);
+      });
+    }
+
+    let finalVideoUrl = candidates.find(c => c.includes('aweme')) || candidates.sort((a,b) => b.length - a.length)[0];
+
+    return NextResponse.json({
+      status: 'success',
+      data: {
+        id: itemStruct.id,
+        title: itemStruct.desc || 'Video TikTok',
+        cover: itemStruct.video?.cover || '',
+        play: { UrlList: [finalVideoUrl] },
+        music: itemStruct.music?.playUrl || '',
+        author: {
+          nickname: itemStruct.author?.nickname || 'User',
+          avatar: itemStruct.author?.avatarLarger || ''
+        }
+      }
+    });
+
+  } catch (error) {
+    // Sekarang error message aslinya bakal dikirim ke frontend biar kita tahu masalahnya apa
+    return NextResponse.json({ status: 'error', message: error.message });
+  }
+}
