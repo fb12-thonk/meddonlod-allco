@@ -3,6 +3,13 @@ import { useState } from 'react';
 import MainBox from '../components/MainBox';
 import ContentArea from '../components/ContentArea';
 
+// META TAG SEO GOOGLE
+export const metadata = {
+  title: `TikTok Video Downloader Without Watermark - ${siteConfig.SITENAME}`,
+  description: `Download TikTok videos without watermark for free and in high quality. Fast, easy, and no registration required on ${siteConfig.SITENAME}.`,
+  keywords: `TikTok downloader, download TikTok video no watermark, TikTok to MP4, save TikTok videos, TikTok video saver, ${siteConfig.SITENAME}`,
+};
+
 export default function TikTokDownloader() {
   const [url, setUrl] = useState('');
   const [loading, setLoading] = useState(false);
