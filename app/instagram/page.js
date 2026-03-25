@@ -3,6 +3,13 @@ import { useState } from 'react';
 import MainBox from '../components/MainBox';
 import ContentArea from '../components/ContentArea';
 
+// META TAG SEO GOOGLE
+export const metadata = {
+  title: `Instagram Video & Reels Downloader HD - ${siteConfig.SITENAME}`,
+  description: `Download Instagram Reels, Stories, Photos, and IGTV videos for free. High-quality MP4 downloads with no login required on ${siteConfig.SITENAME}.`,
+  keywords: `Instagram downloader, download Instagram reels, IG story downloader, Instagram video saver, IGTV downloader, download IG photos, ${siteConfig.SITENAME}`,
+};
+
 export default function InstagramDownloader() {
   const [url, setUrl] = useState('');
   const [loading, setLoading] = useState(false);
