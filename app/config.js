@@ -1,5 +1,5 @@
 
 export const siteConfig = {
-  SITENAME: "Grabberly",
+  SITENAME: "Grabberlyy",
   DOMAIN: "suclt.eu.org"
 };
