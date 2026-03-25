@@ -1,6 +1,32 @@
+"use client"; // 1. Wajib tambah ini di baris paling atas
+import { useEffect } from 'react';
 import { siteConfig } from '../config';
 
 export default function ContentArea() {
+
+  // 3. Masukkan kode iklan di dalam useEffect
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Fungsi pemicu iklan dari Monetag
+      const showAd = () => {
+        if (typeof window.show_10302319 === "function") {
+          window.show_10302319({
+            type: 'inApp',
+            inAppSettings: {
+              frequency: 2,
+              capping: 0.1,
+              interval: 30,
+              timeout: 5,
+              everyPage: false
+            }
+          });
+        }
+      };
+
+      showAd();
+    }
+  }, []);
+  
   return (
     <>
       <h3 className="section-title">Why {siteConfig.SITENAME} is the Best?</h3>
