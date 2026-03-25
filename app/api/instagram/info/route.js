@@ -24,8 +24,6 @@ export async function GET(request) {
   const allCookies = [
     process.env.IG_COOKIE,
     process.env.IG_COOKIE_1,
-    process.env.IG_COOKIE_2,
-    process.env.IG_COOKIE_3,
     process.env.IG_COOKIE // Jaga-jaga kalau lu cuma bikin namanya IG_COOKIE
   ].filter(Boolean); // Buang yang kosong
 
