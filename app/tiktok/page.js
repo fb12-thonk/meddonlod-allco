@@ -55,7 +55,12 @@ export default function TikTokDownloader() {
         loading={loading}
       >
         
-        
+        {/* Tampilkan Error jika link salah atau API gagal */}
+        {error && (
+          <div className="alert alert-danger text-left" style={{ marginTop: '20px' }}>
+            {error}
+          </div>
+        )}
 
         {/* Tampilkan Kotak Hasil 3D jika data API sukses */}
         {result && (
