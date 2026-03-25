@@ -38,7 +38,7 @@ export default function InstagramDownloader() {
 
   const handleDownload = (fileUrl) => {
     if (!fileUrl) return;
-    window.location.href = `/api/instagram/download?url=${encodeURIComponent(fileUrl)}`;
+    const downloadLink = `/api/instagram/download?url=${encodeURIComponent(fileUrl)}`;
     window.open(downloadLink, '_blank');
   };
   
