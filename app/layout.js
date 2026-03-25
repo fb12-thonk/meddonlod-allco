@@ -64,6 +64,16 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+
+         <Script 
+          src="//libtl.com/sdk.js" 
+          data-zone="10302319" 
+          data-sdk="show_10302319"
+          strategy="afterInteractive" // Ini supaya iklan tidak bikin web lemot saat loading awal
+        />
+
+        <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
+         
       </head>
       <body>
         <Header />
