@@ -38,7 +38,8 @@ export default function FacebookDownloader() {
 
   const handleDownload = (fileUrl) => {
     if (!fileUrl) return;
-    window.location.href = `/api/facebook/download?url=${encodeURIComponent(fileUrl)}`;
+    window.downloadLink = `/api/facebook/download?url=${encodeURIComponent(fileUrl)}`;
+    window.open(downloadLink, '_blank');
   };
 
   return (
