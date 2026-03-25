@@ -38,9 +38,9 @@ export default function PinterestDownloader() {
 
   const handleDownload = (fileUrl) => {
     if (!fileUrl) return;
-    window.location.href = `/api/pinterest/download?url=${encodeURIComponent(fileUrl)}`;
+    window.downloadLink = `/api/pinterest/download?url=${encodeURIComponent(fileUrl)}`;
+    window.open(downloadLink, '_blank');
   };
-
   return (
     <div className="container">
       
