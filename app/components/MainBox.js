@@ -2,6 +2,13 @@
 'use client'; 
 import { useState } from 'react';
 
+// Pantau prop 'error'. Kalo ada isinya, langsung keluarin Toast.
+useEffect(() => {
+  if (error) {
+    showToast(error, false); 
+  }
+}, [error]);
+
 export default function MainBox({
   hideInput = false, 
   activeTab = '',    
