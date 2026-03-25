@@ -3,12 +3,7 @@ import { useState } from 'react';
 import MainBox from '../components/MainBox';
 import ContentArea from '../components/ContentArea';
 
-// META TAG SEO GOOGLE
-export const metadata = {
-  title: `Free & Fast YouTube Downloader - ${siteConfig.SITENAME}`,
-  description: `Download YouTube videos and audio easily, fast, and for free on ${siteConfig.SITENAME}. Enjoy high-quality downloads with no limits.`,
-  keywords: `YouTube Downloader, download YouTube videos, free yt downloader, youtube to mp4, youtube to mp3, fast video downloader, ${siteConfig.SITENAME}`,
-};
+
 
 export default function YouTubeDownloader() {
   const [url, setUrl] = useState('');
