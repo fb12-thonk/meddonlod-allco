@@ -4,10 +4,9 @@ export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const url = searchParams.get('url');
 
-  if (!url) return NextResponse.json({ status: 'error', message: 'Empty URL' });
+  if (!url) return NextResponse.json({ status: 'error', message: 'URL is required!' }, { status: 400 });
 
   try {
-    // Header dibikin semirip mungkin sama browser asli biar gak dikira bot
     const headers = {
       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
@@ -15,15 +14,15 @@ export async function GET(request) {
       'Referer': 'https://www.tiktok.com/',
     };
 
-    // Tambahin cache: 'no-store' biar Next.js gak nyimpen request yang gagal
     const response = await fetch(url, {
       headers,
       cache: 'no-store', 
       redirect: 'follow'
     });
 
+    // PERBAIKAN: Jika respons TIDAK ok, lempar error
     if (!response.ok) {
-       throw new Error(`Failed to access TikTok: HTTP ${response.status}`);
+       throw new Error(`TikTok Server Error: ${response.status}`);
     }
 
     const html = await response.text();
@@ -43,7 +42,7 @@ export async function GET(request) {
       }
     }
 
-    if (!jsonText) throw new Error("TikTok Captcha Blocked or File Not Found.");
+    if (!jsonText) throw new Error("Captcha Blocked or Video Private. Please try again.");
 
     const data = JSON.parse(jsonText);
     let itemStruct = null;
@@ -60,7 +59,7 @@ export async function GET(request) {
     }
 
     itemStruct = findStruct(data);
-    if (!itemStruct) throw new Error("Video data found.");
+    if (!itemStruct) throw new Error("Video data not found. Make sure the link is correct.");
 
     let candidates = [];
     if (itemStruct.video?.playAddr?.UrlList) candidates.push(...itemStruct.video.playAddr.UrlList);
@@ -88,7 +87,10 @@ export async function GET(request) {
     });
 
   } catch (error) {
-    // Sekarang error message aslinya bakal dikirim ke frontend biar kita tahu masalahnya apa
-    return NextResponse.json({ status: 'error', message: error.message });
+    // Kirim pesan error dalam format JSON agar ditangkap oleh Toast di frontend
+    return NextResponse.json({ 
+      status: 'error', 
+      message: error.message || "Unknown error occurred" 
+    }, { status: 500 });
   }
 }
