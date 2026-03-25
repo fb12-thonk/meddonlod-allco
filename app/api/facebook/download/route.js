@@ -4,14 +4,14 @@ export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const fileUrl = searchParams.get('url');
 
-  if (!fileUrl) return new NextResponse('URL kosong', { status: 400 });
+  if (!fileUrl) return new NextResponse('Empty URL', { status: 400 });
 
   try {
     const response = await fetch(fileUrl, { 
       headers: { 'User-Agent': 'Mozilla/5.0' } 
     });
     
-    if (!response.ok) throw new Error('Gagal mengunduh file');
+    if (!response.ok) throw new Error('Failed to download file');
 
     const contentType = response.headers.get('content-type') || 'application/octet-stream';
     let ext = 'mp4';
