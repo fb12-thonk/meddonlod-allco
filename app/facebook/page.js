@@ -3,7 +3,6 @@ import { useState } from 'react';
 import MainBox from '../components/MainBox';
 import ContentArea from '../components/ContentArea';
 
-
 export default function FacebookDownloader() {
   const [url, setUrl] = useState('');
   const [loading, setLoading] = useState(false);
