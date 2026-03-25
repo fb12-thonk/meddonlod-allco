@@ -57,7 +57,7 @@ export default function TikTokDownloader() {
         
         {/* Tampilkan Error jika link salah atau API gagal */}
         {error && (
-          <div className="alert alert-danger text-left" style={{ marginTop: '20px' }}>
+          <div className="alert alert-danger text-left" style={{ marginTop: '20px' display: 'none' }}>
             {error}
           </div>
         )}
