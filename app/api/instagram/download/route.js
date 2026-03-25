@@ -15,7 +15,7 @@ export async function GET(request) {
 
     const contentType = response.headers.get('content-type') || 'application/octet-stream';
     const ext = contentType.includes('video') ? 'mp4' : 'jpg';
-    const filename = `DOMAIN_COM_SITE_IG_${Date.now()}.${ext}`;
+    const filename = `ig_media_${Date.now()}.${ext}`;
 
     const headers = new Headers(response.headers);
     headers.set('Content-Type', contentType);
