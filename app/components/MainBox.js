@@ -1,12 +1,6 @@
 // file: components/MainBox.js
 'use client'; 
-import { useState, useEffect } from 'react';
-// Pantau prop 'error'. Kalo ada isinya, langsung keluarin Toast.
-useEffect(() => {
-  if (error) {
-    showToast(error, false); 
-  }
-}, [error]);
+import { useState } from 'react';
 
 export default function MainBox({
   hideInput = false, 
