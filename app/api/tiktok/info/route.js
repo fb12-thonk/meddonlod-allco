@@ -4,7 +4,7 @@ export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const url = searchParams.get('url');
 
-  if (!url) return NextResponse.json({ status: 'error', message: 'URL Kosong' });
+  if (!url) return NextResponse.json({ status: 'error', message: 'Empty URL' });
 
   try {
     // Header dibikin semirip mungkin sama browser asli biar gak dikira bot
@@ -23,7 +23,7 @@ export async function GET(request) {
     });
 
     if (!response.ok) {
-       throw new Error(`Gagal akses TikTok: HTTP ${response.status}`);
+       throw new Error(`Failed to access TikTok: HTTP ${response.status}`);
     }
 
     const html = await response.text();
@@ -43,7 +43,7 @@ export async function GET(request) {
       }
     }
 
-    if (!jsonText) throw new Error("Kena blokir Captcha TikTok atau script gak ketemu.");
+    if (!jsonText) throw new Error("TikTok Captcha Blocked or File Not Found.");
 
     const data = JSON.parse(jsonText);
     let itemStruct = null;
@@ -60,7 +60,7 @@ export async function GET(request) {
     }
 
     itemStruct = findStruct(data);
-    if (!itemStruct) throw new Error("Data video gak ketemu di dalam JSON.");
+    if (!itemStruct) throw new Error("Video data found.");
 
     let candidates = [];
     if (itemStruct.video?.playAddr?.UrlList) candidates.push(...itemStruct.video.playAddr.UrlList);
