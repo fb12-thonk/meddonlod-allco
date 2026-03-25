@@ -18,7 +18,7 @@ export async function GET(request) {
     // Ekstrak ekstensi asli dari URL
     const extMatch = mediaUrl.match(/\.([^.]+)(?:\?.*)?$/);
     const ext = extMatch ? extMatch[1] : 'bin';
-    const filename = `DOMAIN_COM_SITE_Pin_${Date.now()}.${ext}`;
+    const filename = `pinterest_media_${Date.now()}.${ext}`;
 
     const headers = new Headers(response.headers);
     headers.set('Content-Type', contentType);
