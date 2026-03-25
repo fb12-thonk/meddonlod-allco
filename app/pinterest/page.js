@@ -3,12 +3,7 @@ import { useState } from 'react';
 import MainBox from '../components/MainBox';
 import ContentArea from '../components/ContentArea';
 
-// META TAG SEO GOOGLE
-export const metadata = {
-  title: `Pinterest Video & Image Downloader HD - ${siteConfig.SITENAME}`,
-  description: `Download Pinterest videos, high-quality images, and GIFs easily for free. Fast, secure, and no limits on ${siteConfig.SITENAME}.`,
-  keywords: `Pinterest downloader, download Pinterest video, Pinterest image downloader, save Pinterest pins, Pinterest to MP4, HD image downloader, ${siteConfig.SITENAME}`,
-};
+
 
 export default function PinterestDownloader() {
   const [url, setUrl] = useState('');
