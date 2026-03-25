@@ -1,7 +1,6 @@
 // file: components/MainBox.js
 'use client'; 
-import { useState } from 'react';
-
+import { useState, useEffect } from 'react';
 // Pantau prop 'error'. Kalo ada isinya, langsung keluarin Toast.
 useEffect(() => {
   if (error) {
