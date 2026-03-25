@@ -4,10 +4,10 @@ export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const url = searchParams.get('url');
 
-  if (!url) return NextResponse.json({ error: "URL kosong" });
+  if (!url) return NextResponse.json({ error: "Empty URL" });
 
   const match = url.match(/\/(?:reel|p|tv)\/([^/?#&]+)/i);
-  if (!match) return NextResponse.json({ error: "URL Instagram tidak valid" });
+  if (!match) return NextResponse.json({ error: "Invalid Instagram URL" });
 
   const shortcode = match[1];
 
@@ -31,7 +31,7 @@ export async function GET(request) {
 
   // Kalau gak ada satupun yang diisi di Vercel
   if (allCookies.length === 0) {
-    return NextResponse.json({ error: "Cookie IG belum disetting di Vercel." });
+    return NextResponse.json({ error: "IG cookies have not been set" });
   }
 
   // Acak pilih satu cookie
@@ -54,13 +54,13 @@ export async function GET(request) {
     try {
       ig = JSON.parse(text);
     } catch (e) {
-      return NextResponse.json({ error: "Gagal parse JSON. Instagram memblokir request." });
+      return NextResponse.json({ error: "Parse failed. Instagram blocked the request." });
     }
 
     const post = ig?.data?.xdt_shortcode_media;
 
     if (!post) {
-      return NextResponse.json({ error: "Post private / tidak tersedia" });
+      return NextResponse.json({ error: "Post private / not available" });
     }
 
     let mediaList = [];
