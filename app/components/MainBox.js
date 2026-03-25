@@ -44,13 +44,37 @@ export default function MainBox({
   };
 
   const handleDownloadClick = () => {
-    if (!inputValue || inputValue.trim() === "") {
-      showToast('Please paste a media link first!', false);
-    } else {
-      showToast('Processing link... Preparing Download.', true);
+  // 1. Validasi Input Kosong
+  if (!inputValue || inputValue.trim() === "") {
+    showToast('Please paste a media link first!', false);
+    return; // Stop di sini kalau kosong
+  }
+
+  // 2. Cek apakah SDK Iklan Monetag sudah siap
+  if (typeof window !== "undefined" && typeof window.show_10302319 === "function") {
+    
+    showToast('Preparing your download...', true);
+
+    // 3. Panggil Iklan Rewarded Interstitial
+    window.show_10302319().then(() => {
+      // --- KODE INI JALAN SETELAH USER SELESAI NONTON IKLAN ---
+      showToast('Processing link...', true);
+      
+      // Jalankan fungsi download asli kamu
       if (onDownload) onDownload();
-    }
-  };
+
+    }).catch((err) => {
+      // Jika iklan gagal/eror, jangan blokir user, langsung download saja
+      console.error("Ads Error:", err);
+      if (onDownload) onDownload();
+    });
+
+  } else {
+    // 4. Jika SDK Iklan belum terload (karena sinyal atau diblokir), langsung download
+    showToast('Processing link...', true);
+    if (onDownload) onDownload();
+  }
+};
   // -----------------------------------------------------
 
   const goTo = (path) => {
