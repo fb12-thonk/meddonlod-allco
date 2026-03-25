@@ -36,9 +36,13 @@ export default function TikTokDownloader() {
   };
 
   const handleDownload = (fileUrl, type) => {
-    if (!fileUrl) return;
-    window.location.href = `/api/tiktok/download?video=${encodeURIComponent(fileUrl)}&type=${type}`;
-  };
+  if (!fileUrl) return;
+  
+  const downloadLink = `/api/tiktok/download?video=${encodeURIComponent(fileUrl)}&type=${type}`;
+  
+  // Buka di tab/jendela baru. Di Telegram ini biasanya memicu download eksternal.
+  window.open(downloadLink, '_blank');
+};
 
   return (
     <div className="container">
